@@ -58,4 +58,20 @@ public class CategoryController {
                 ApiResponse.<CategoryResponse>builder().data(deleted).message("Category deleted successfully").statusCode(200).build()
         );
     }
+
+    @GetMapping("/page")
+    public ResponseEntity<ApiResponse<com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse>>> getCategoriesPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
+        com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse> pagedCategories = categoryService.getCategoriesPaginated(pageable);
+        return ResponseEntity.ok(
+                ApiResponse.<com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse>>builder()
+                        .data(pagedCategories)
+                        .message("Categories paginated successfully")
+                        .statusCode(200)
+                        .build()
+        );
+    }
 }

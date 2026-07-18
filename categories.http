@@ -1,0 +1,51 @@
+### Create a new Category
+POST http://localhost:8080/api/v1/categories
+Content-Type: application/json
+
+{
+  "title": "Beverages",
+  "slug": "beverages",
+  "imageUrl": "https://example.com/images/beverages.png",
+  "sortOrder": 1,
+  "isActive": true,
+  "description": "All kinds of drinks and beverages"
+}
+
+###
+
+### Get all Categories
+GET http://localhost:8080/api/v1/categories
+Accept: application/json
+
+###
+
+### Get Categories Paginated
+GET http://localhost:8080/api/v1/categories/page?page=0&size=5
+Accept: application/json
+
+###
+
+### Get a single Category by ID (Replace 1 with actual ID)
+GET http://localhost:8080/api/v1/categories/1
+Accept: application/json
+
+###
+
+### Update a Category (Replace 1 with actual ID)
+PUT http://localhost:8080/api/v1/categories/1
+Content-Type: application/json
+
+{
+  "title": "Beverages (Updated)",
+  "slug": "beverages-updated",
+  "imageUrl": "https://example.com/images/beverages-new.png",
+  "sortOrder": 2,
+  "isActive": true,
+  "description": "Updated description for beverages"
+}
+
+###
+
+### Delete a Category (Replace 1 with actual ID)
+DELETE http://localhost:8080/api/v1/categories/1
+Accept: application/json

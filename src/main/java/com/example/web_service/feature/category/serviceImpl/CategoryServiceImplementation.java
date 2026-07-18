@@ -58,5 +58,19 @@ public class CategoryServiceImplementation implements CategoryService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Category not found with id: " + id));
     }
+
+    @Override
+    public com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse> getCategoriesPaginated(org.springframework.data.domain.Pageable pageable) {
+        org.springframework.data.domain.Page<Category> categoryPage = categoryRepository.findAll(pageable);
+        
+        com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse> pageResponse = new com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<>();
+        pageResponse.setContent(categoryMapper.toResponseList(categoryPage.getContent()));
+        pageResponse.setTotalElement((int) categoryPage.getTotalElements());
+        pageResponse.setTotalPages(categoryPage.getTotalPages());
+        pageResponse.setLast(categoryPage.isLast());
+        pageResponse.setFirst(categoryPage.isFirst());
+        
+        return pageResponse;
+    }
 }
 

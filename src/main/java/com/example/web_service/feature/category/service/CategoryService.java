@@ -17,4 +17,6 @@ public interface CategoryService {
     CategoryResponse updateCategory(Long id, CategoryRequestUpdate categoryRequestUpdate);
 
     CategoryResponse deleteCategory(Long id);
+
+    com.example.web_service.feature.category.dto.res.CategoryPageResponseDto<CategoryResponse> getCategoriesPaginated(org.springframework.data.domain.Pageable pageable);
 }
