@@ -13,12 +13,12 @@ public record SaleHeaderRequest(
     Double total,
     String invoiceType,
     Boolean status,
-    User user,
-    Delivery delivery,
+    Integer userId,
+    Integer deliveryId,
     List<SaleDetail> saleDetails,
     String paymentMethod,
     Double commissionAmount,
     Double exchangeRate,
-    ExchangeRate exchangeRateModel
+    Integer exchangeRateModelId
 ) {
 }

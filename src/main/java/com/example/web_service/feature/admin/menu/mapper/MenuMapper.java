@@ -18,8 +18,16 @@ public class MenuMapper {
         entity.setDescription(req.description());
         entity.setImage(req.image());
         entity.setRating(req.rating());
-        entity.setRestaurants(req.restaurants());
-        entity.setCategories(req.categories());
+        if (req.restaurantsId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantsId());
+            entity.setRestaurants(_m);
+        }
+        if (req.categoriesId() != null) {
+            com.example.web_service.feature.category.model.Category _m = new com.example.web_service.feature.category.model.Category();
+            _m.setId((long) req.categoriesId());
+            entity.setCategories(_m);
+        }
         return entity;
     }
 
@@ -59,11 +67,15 @@ public class MenuMapper {
         if (req.rating() != null) {
             entity.setRating(req.rating());
         }
-        if (req.restaurants() != null) {
-            entity.setRestaurants(req.restaurants());
+        if (req.restaurantsId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantsId());
+            entity.setRestaurants(_m);
         }
-        if (req.categories() != null) {
-            entity.setCategories(req.categories());
+        if (req.categoriesId() != null) {
+            com.example.web_service.feature.category.model.Category _m = new com.example.web_service.feature.category.model.Category();
+            _m.setId((long) req.categoriesId());
+            entity.setCategories(_m);
         }
     }
 }

@@ -9,8 +9,8 @@ import com.example.web_service.feature.admin.user.model.User;
 
 public record FavoritesRequest(
     Boolean status,
-    User user,
-    Restaurant restaurants,
-    Menu menu
+    Integer userId,
+    Integer restaurantsId,
+    Integer menuId
 ) {
 }

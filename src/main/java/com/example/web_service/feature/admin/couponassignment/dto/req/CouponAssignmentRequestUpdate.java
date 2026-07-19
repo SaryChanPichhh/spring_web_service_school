@@ -8,9 +8,9 @@ import com.example.web_service.feature.admin.menu.model.Menu;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
 
 public record CouponAssignmentRequestUpdate(
-    Coupon coupon,
-    Restaurant restaurant,
-    Menu menuItem,
+    Integer couponId,
+    Integer restaurantId,
+    Integer menuItemId,
     String assignmentType,
     String notes,
     String status

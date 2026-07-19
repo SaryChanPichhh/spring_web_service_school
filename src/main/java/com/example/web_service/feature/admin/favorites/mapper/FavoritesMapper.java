@@ -14,9 +14,21 @@ public class FavoritesMapper {
         if (req == null) return null;
         Favorites entity = new Favorites();
         entity.setStatus(req.status());
-        entity.setUser(req.user());
-        entity.setRestaurants(req.restaurants());
-        entity.setMenu(req.menu());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
+        }
+        if (req.restaurantsId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantsId());
+            entity.setRestaurants(_m);
+        }
+        if (req.menuId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuId());
+            entity.setMenu(_m);
+        }
         return entity;
     }
 
@@ -41,14 +53,20 @@ public class FavoritesMapper {
         if (req.status() != null) {
             entity.setStatus(req.status());
         }
-        if (req.user() != null) {
-            entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
         }
-        if (req.restaurants() != null) {
-            entity.setRestaurants(req.restaurants());
+        if (req.restaurantsId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantsId());
+            entity.setRestaurants(_m);
         }
-        if (req.menu() != null) {
-            entity.setMenu(req.menu());
+        if (req.menuId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuId());
+            entity.setMenu(_m);
         }
     }
 }

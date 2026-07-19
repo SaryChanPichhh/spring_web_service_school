@@ -16,13 +16,25 @@ public class SaleHeaderMapper {
         entity.setTotal(req.total());
         entity.setInvoiceType(req.invoiceType());
         entity.setStatus(req.status());
-        entity.setUser(req.user());
-        entity.setDelivery(req.delivery());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
+        }
+        if (req.deliveryId() != null) {
+            com.example.web_service.feature.admin.delivery.model.Delivery _m = new com.example.web_service.feature.admin.delivery.model.Delivery();
+            _m.setId((long) req.deliveryId());
+            entity.setDelivery(_m);
+        }
         entity.setSaleDetails(req.saleDetails());
         entity.setPaymentMethod(req.paymentMethod());
         entity.setCommissionAmount(req.commissionAmount());
         entity.setExchangeRate(req.exchangeRate());
-        entity.setExchangeRateModel(req.exchangeRateModel());
+        if (req.exchangeRateModelId() != null) {
+            com.example.web_service.feature.admin.exchangerate.model.ExchangeRate _m = new com.example.web_service.feature.admin.exchangerate.model.ExchangeRate();
+            _m.setId((long) req.exchangeRateModelId());
+            entity.setExchangeRateModel(_m);
+        }
         return entity;
     }
 
@@ -59,11 +71,15 @@ public class SaleHeaderMapper {
         if (req.status() != null) {
             entity.setStatus(req.status());
         }
-        if (req.user() != null) {
-            entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
         }
-        if (req.delivery() != null) {
-            entity.setDelivery(req.delivery());
+        if (req.deliveryId() != null) {
+            com.example.web_service.feature.admin.delivery.model.Delivery _m = new com.example.web_service.feature.admin.delivery.model.Delivery();
+            _m.setId((long) req.deliveryId());
+            entity.setDelivery(_m);
         }
         if (req.saleDetails() != null) {
             entity.setSaleDetails(req.saleDetails());
@@ -77,8 +93,10 @@ public class SaleHeaderMapper {
         if (req.exchangeRate() != null) {
             entity.setExchangeRate(req.exchangeRate());
         }
-        if (req.exchangeRateModel() != null) {
-            entity.setExchangeRateModel(req.exchangeRateModel());
+        if (req.exchangeRateModelId() != null) {
+            com.example.web_service.feature.admin.exchangerate.model.ExchangeRate _m = new com.example.web_service.feature.admin.exchangerate.model.ExchangeRate();
+            _m.setId((long) req.exchangeRateModelId());
+            entity.setExchangeRateModel(_m);
         }
     }
 }

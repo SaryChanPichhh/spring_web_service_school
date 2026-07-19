@@ -18,6 +18,6 @@ public record RestaurantRequest(
     Boolean isOpen,
     String basedCountry,
     Double commissionRate,
-    User user
+    Integer userId
 ) {
 }

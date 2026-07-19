@@ -12,7 +12,7 @@ public record MenuRequestUpdate(
     String description,
     String image,
     Double rating,
-    Restaurant restaurants,
-    Category categories
+    Integer restaurantsId,
+    Integer categoriesId
 ) {
 }

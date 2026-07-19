@@ -13,8 +13,16 @@ public class ReviewMapper {
     public Review fromRequest(ReviewRequest req) {
         if (req == null) return null;
         Review entity = new Review();
-        entity.setUser(req.user());
-        entity.setRestaurant(req.restaurant());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
+        }
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
+        }
         entity.setRating(req.rating());
         entity.setComment(req.comment());
         return entity;
@@ -38,11 +46,15 @@ public class ReviewMapper {
 
     public void updateFromRequest(Review entity, ReviewRequestUpdate req) {
         if (req == null) return;
-        if (req.user() != null) {
-            entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
         }
-        if (req.restaurant() != null) {
-            entity.setRestaurant(req.restaurant());
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
         }
         if (req.rating() != null) {
             entity.setRating(req.rating());

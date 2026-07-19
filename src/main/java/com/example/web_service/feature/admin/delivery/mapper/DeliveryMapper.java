@@ -27,7 +27,11 @@ public class DeliveryMapper {
         entity.setState(req.state());
         entity.setZip(req.zip());
         entity.setCountry(req.country());
-        entity.setUsers(req.users());
+        if (req.usersId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.usersId());
+            entity.setUsers(_m);
+        }
         return entity;
     }
 
@@ -103,8 +107,10 @@ public class DeliveryMapper {
         if (req.country() != null) {
             entity.setCountry(req.country());
         }
-        if (req.users() != null) {
-            entity.setUsers(req.users());
+        if (req.usersId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.usersId());
+            entity.setUsers(_m);
         }
     }
 }

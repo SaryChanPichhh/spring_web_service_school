@@ -13,8 +13,16 @@ public class FreeDeliveryAssignmentMapper {
     public FreeDeliveryAssignment fromRequest(FreeDeliveryAssignmentRequest req) {
         if (req == null) return null;
         FreeDeliveryAssignment entity = new FreeDeliveryAssignment();
-        entity.setRestaurant(req.restaurant());
-        entity.setMenuItem(req.menuItem());
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
+        }
+        if (req.menuItemId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuItemId());
+            entity.setMenuItem(_m);
+        }
         entity.setAssignmentType(req.assignmentType());
         entity.setStatus(req.status());
         entity.setMinOrderAmount(req.minOrderAmount());
@@ -46,11 +54,15 @@ public class FreeDeliveryAssignmentMapper {
 
     public void updateFromRequest(FreeDeliveryAssignment entity, FreeDeliveryAssignmentRequestUpdate req) {
         if (req == null) return;
-        if (req.restaurant() != null) {
-            entity.setRestaurant(req.restaurant());
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
         }
-        if (req.menuItem() != null) {
-            entity.setMenuItem(req.menuItem());
+        if (req.menuItemId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuItemId());
+            entity.setMenuItem(_m);
         }
         if (req.assignmentType() != null) {
             entity.setAssignmentType(req.assignmentType());

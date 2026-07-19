@@ -19,9 +19,21 @@ public class SaleDetailMapper {
         entity.setSalePrice(req.salePrice());
         entity.setTotal(req.total());
         entity.setStatus(req.status());
-        entity.setSaleHeader(req.saleHeader());
-        entity.setCoupon(req.coupon());
-        entity.setRestaurant(req.restaurant());
+        if (req.saleHeaderId() != null) {
+            com.example.web_service.feature.admin.saleheader.model.SaleHeader _m = new com.example.web_service.feature.admin.saleheader.model.SaleHeader();
+            _m.setId(req.saleHeaderId());
+            entity.setSaleHeader(_m);
+        }
+        if (req.couponId() != null) {
+            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
+            _m.setCouponId((long) req.couponId());
+            entity.setCoupon(_m);
+        }
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
+        }
         return entity;
     }
 
@@ -66,14 +78,20 @@ public class SaleDetailMapper {
         if (req.status() != null) {
             entity.setStatus(req.status());
         }
-        if (req.saleHeader() != null) {
-            entity.setSaleHeader(req.saleHeader());
+        if (req.saleHeaderId() != null) {
+            com.example.web_service.feature.admin.saleheader.model.SaleHeader _m = new com.example.web_service.feature.admin.saleheader.model.SaleHeader();
+            _m.setId(req.saleHeaderId());
+            entity.setSaleHeader(_m);
         }
-        if (req.coupon() != null) {
-            entity.setCoupon(req.coupon());
+        if (req.couponId() != null) {
+            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
+            _m.setCouponId((long) req.couponId());
+            entity.setCoupon(_m);
         }
-        if (req.restaurant() != null) {
-            entity.setRestaurant(req.restaurant());
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
         }
     }
 }

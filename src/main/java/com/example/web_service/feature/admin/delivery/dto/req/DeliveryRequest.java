@@ -20,6 +20,6 @@ public record DeliveryRequest(
     String state,
     String zip,
     String country,
-    User users
+    Integer usersId
 ) {
 }

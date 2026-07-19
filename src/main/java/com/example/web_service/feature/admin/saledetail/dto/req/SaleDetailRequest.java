@@ -14,8 +14,8 @@ public record SaleDetailRequest(
     Double salePrice,
     Double total,
     Boolean status,
-    SaleHeader saleHeader,
-    Coupon coupon,
-    Restaurant restaurant
+    Integer saleHeaderId,
+    Integer couponId,
+    Integer restaurantId
 ) {
 }

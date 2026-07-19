@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import com.example.web_service.feature.admin.user.model.User;
 
 public record FeedbackRequestUpdate(
-    User user,
+    Integer userId,
     String subject,
     String message,
     Boolean isRead

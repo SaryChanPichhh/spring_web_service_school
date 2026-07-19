@@ -25,7 +25,11 @@ public class RestaurantMapper {
         entity.setIsOpen(req.isOpen());
         entity.setBasedCountry(req.basedCountry());
         entity.setCommissionRate(req.commissionRate());
-        entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
+        }
         return entity;
     }
 
@@ -92,8 +96,10 @@ public class RestaurantMapper {
         if (req.commissionRate() != null) {
             entity.setCommissionRate(req.commissionRate());
         }
-        if (req.user() != null) {
-            entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
         }
     }
 }

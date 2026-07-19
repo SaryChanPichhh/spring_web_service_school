@@ -13,7 +13,11 @@ public class FeedbackMapper {
     public Feedback fromRequest(FeedbackRequest req) {
         if (req == null) return null;
         Feedback entity = new Feedback();
-        entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
+        }
         entity.setSubject(req.subject());
         entity.setMessage(req.message());
         entity.setIsRead(req.isRead());
@@ -38,8 +42,10 @@ public class FeedbackMapper {
 
     public void updateFromRequest(Feedback entity, FeedbackRequestUpdate req) {
         if (req == null) return;
-        if (req.user() != null) {
-            entity.setUser(req.user());
+        if (req.userId() != null) {
+            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
+            _m.setId(req.userId());
+            entity.setUser(_m);
         }
         if (req.subject() != null) {
             entity.setSubject(req.subject());

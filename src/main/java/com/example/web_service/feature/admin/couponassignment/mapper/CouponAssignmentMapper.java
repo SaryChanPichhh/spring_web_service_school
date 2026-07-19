@@ -13,9 +13,21 @@ public class CouponAssignmentMapper {
     public CouponAssignment fromRequest(CouponAssignmentRequest req) {
         if (req == null) return null;
         CouponAssignment entity = new CouponAssignment();
-        entity.setCoupon(req.coupon());
-        entity.setRestaurant(req.restaurant());
-        entity.setMenuItem(req.menuItem());
+        if (req.couponId() != null) {
+            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
+            _m.setCouponId((long) req.couponId());
+            entity.setCoupon(_m);
+        }
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
+        }
+        if (req.menuItemId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuItemId());
+            entity.setMenuItem(_m);
+        }
         entity.setAssignmentType(req.assignmentType());
         entity.setNotes(req.notes());
         entity.setStatus(req.status());
@@ -42,14 +54,20 @@ public class CouponAssignmentMapper {
 
     public void updateFromRequest(CouponAssignment entity, CouponAssignmentRequestUpdate req) {
         if (req == null) return;
-        if (req.coupon() != null) {
-            entity.setCoupon(req.coupon());
+        if (req.couponId() != null) {
+            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
+            _m.setCouponId((long) req.couponId());
+            entity.setCoupon(_m);
         }
-        if (req.restaurant() != null) {
-            entity.setRestaurant(req.restaurant());
+        if (req.restaurantId() != null) {
+            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
+            _m.setResId(req.restaurantId());
+            entity.setRestaurant(_m);
         }
-        if (req.menuItem() != null) {
-            entity.setMenuItem(req.menuItem());
+        if (req.menuItemId() != null) {
+            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
+            _m.setId(req.menuItemId());
+            entity.setMenuItem(_m);
         }
         if (req.assignmentType() != null) {
             entity.setAssignmentType(req.assignmentType());

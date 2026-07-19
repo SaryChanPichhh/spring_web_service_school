@@ -7,8 +7,8 @@ import com.example.web_service.feature.admin.menu.model.Menu;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
 
 public record FreeDeliveryAssignmentRequest(
-    Restaurant restaurant,
-    Menu menuItem,
+    Integer restaurantId,
+    Integer menuItemId,
     String assignmentType,
     String status,
     Double minOrderAmount,
