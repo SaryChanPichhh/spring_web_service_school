@@ -15,7 +15,6 @@ public record SaleHeaderRequest(
     Boolean status,
     Integer userId,
     Integer deliveryId,
-    List<SaleDetail> saleDetails,
     String paymentMethod,
     Double commissionAmount,
     Double exchangeRate,

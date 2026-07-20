@@ -4,11 +4,15 @@ import com.example.web_service.feature.admin.menu.dto.req.*;
 import com.example.web_service.feature.admin.menu.dto.res.*;
 import com.example.web_service.feature.admin.menu.model.Menu;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class MenuMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public Menu fromRequest(MenuRequest req) {
         if (req == null) return null;
@@ -19,14 +23,7 @@ public class MenuMapper {
         entity.setImage(req.image());
         entity.setRating(req.rating());
         if (req.restaurantsId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantsId());
-            entity.setRestaurants(_m);
-        }
-        if (req.categoriesId() != null) {
-            com.example.web_service.feature.category.model.Category _m = new com.example.web_service.feature.category.model.Category();
-            _m.setId((long) req.categoriesId());
-            entity.setCategories(_m);
+            entity.setRestaurants(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantsId()));
         }
         return entity;
     }
@@ -41,7 +38,6 @@ public class MenuMapper {
         res.setImage(entity.getImage());
         res.setRating(entity.getRating());
         res.setRestaurants(entity.getRestaurants());
-        res.setCategories(entity.getCategories());
         return res;
     }
 
@@ -68,14 +64,7 @@ public class MenuMapper {
             entity.setRating(req.rating());
         }
         if (req.restaurantsId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantsId());
-            entity.setRestaurants(_m);
-        }
-        if (req.categoriesId() != null) {
-            com.example.web_service.feature.category.model.Category _m = new com.example.web_service.feature.category.model.Category();
-            _m.setId((long) req.categoriesId());
-            entity.setCategories(_m);
+            entity.setRestaurants(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantsId()));
         }
     }
 }

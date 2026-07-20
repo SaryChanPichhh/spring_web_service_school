@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
-import com.example.web_service.feature.category.model.Category;
 
 @Getter
 @Setter
@@ -18,5 +17,4 @@ public class MenuResponse {
     private String image;
     private Double rating;
     private Restaurant restaurants;
-    private Category categories;
 }

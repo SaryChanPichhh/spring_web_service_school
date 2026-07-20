@@ -4,11 +4,15 @@ import com.example.web_service.feature.admin.delivery.dto.req.*;
 import com.example.web_service.feature.admin.delivery.dto.res.*;
 import com.example.web_service.feature.admin.delivery.model.Delivery;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class DeliveryMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public Delivery fromRequest(DeliveryRequest req) {
         if (req == null) return null;
@@ -28,9 +32,7 @@ public class DeliveryMapper {
         entity.setZip(req.zip());
         entity.setCountry(req.country());
         if (req.usersId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.usersId());
-            entity.setUsers(_m);
+            entity.setUsers(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.usersId()));
         }
         return entity;
     }
@@ -108,9 +110,7 @@ public class DeliveryMapper {
             entity.setCountry(req.country());
         }
         if (req.usersId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.usersId());
-            entity.setUsers(_m);
+            entity.setUsers(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.usersId()));
         }
     }
 }

@@ -4,19 +4,21 @@ import com.example.web_service.feature.admin.feedback.dto.req.*;
 import com.example.web_service.feature.admin.feedback.dto.res.*;
 import com.example.web_service.feature.admin.feedback.model.Feedback;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class FeedbackMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public Feedback fromRequest(FeedbackRequest req) {
         if (req == null) return null;
         Feedback entity = new Feedback();
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
         entity.setSubject(req.subject());
         entity.setMessage(req.message());
@@ -43,9 +45,7 @@ public class FeedbackMapper {
     public void updateFromRequest(Feedback entity, FeedbackRequestUpdate req) {
         if (req == null) return;
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
         if (req.subject() != null) {
             entity.setSubject(req.subject());

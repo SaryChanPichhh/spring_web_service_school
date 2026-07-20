@@ -4,11 +4,15 @@ import com.example.web_service.feature.admin.restaurant.dto.req.*;
 import com.example.web_service.feature.admin.restaurant.dto.res.*;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class RestaurantMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public Restaurant fromRequest(RestaurantRequest req) {
         if (req == null) return null;
@@ -26,9 +30,7 @@ public class RestaurantMapper {
         entity.setBasedCountry(req.basedCountry());
         entity.setCommissionRate(req.commissionRate());
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
         return entity;
     }
@@ -97,9 +99,7 @@ public class RestaurantMapper {
             entity.setCommissionRate(req.commissionRate());
         }
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
     }
 }

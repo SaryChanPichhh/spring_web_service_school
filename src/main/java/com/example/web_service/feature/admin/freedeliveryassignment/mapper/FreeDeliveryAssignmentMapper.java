@@ -4,24 +4,24 @@ import com.example.web_service.feature.admin.freedeliveryassignment.dto.req.*;
 import com.example.web_service.feature.admin.freedeliveryassignment.dto.res.*;
 import com.example.web_service.feature.admin.freedeliveryassignment.model.FreeDeliveryAssignment;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class FreeDeliveryAssignmentMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public FreeDeliveryAssignment fromRequest(FreeDeliveryAssignmentRequest req) {
         if (req == null) return null;
         FreeDeliveryAssignment entity = new FreeDeliveryAssignment();
         if (req.restaurantId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantId());
-            entity.setRestaurant(_m);
+            entity.setRestaurant(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantId()));
         }
         if (req.menuItemId() != null) {
-            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
-            _m.setId(req.menuItemId());
-            entity.setMenuItem(_m);
+            entity.setMenuItem(entityManager.find(com.example.web_service.feature.admin.menu.model.Menu.class, req.menuItemId()));
         }
         entity.setAssignmentType(req.assignmentType());
         entity.setStatus(req.status());
@@ -55,14 +55,10 @@ public class FreeDeliveryAssignmentMapper {
     public void updateFromRequest(FreeDeliveryAssignment entity, FreeDeliveryAssignmentRequestUpdate req) {
         if (req == null) return;
         if (req.restaurantId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantId());
-            entity.setRestaurant(_m);
+            entity.setRestaurant(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantId()));
         }
         if (req.menuItemId() != null) {
-            com.example.web_service.feature.admin.menu.model.Menu _m = new com.example.web_service.feature.admin.menu.model.Menu();
-            _m.setId(req.menuItemId());
-            entity.setMenuItem(_m);
+            entity.setMenuItem(entityManager.find(com.example.web_service.feature.admin.menu.model.Menu.class, req.menuItemId()));
         }
         if (req.assignmentType() != null) {
             entity.setAssignmentType(req.assignmentType());

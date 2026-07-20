@@ -4,11 +4,15 @@ import com.example.web_service.feature.admin.saleheader.dto.req.*;
 import com.example.web_service.feature.admin.saleheader.dto.res.*;
 import com.example.web_service.feature.admin.saleheader.model.SaleHeader;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class SaleHeaderMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public SaleHeader fromRequest(SaleHeaderRequest req) {
         if (req == null) return null;
@@ -17,23 +21,16 @@ public class SaleHeaderMapper {
         entity.setInvoiceType(req.invoiceType());
         entity.setStatus(req.status());
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
         if (req.deliveryId() != null) {
-            com.example.web_service.feature.admin.delivery.model.Delivery _m = new com.example.web_service.feature.admin.delivery.model.Delivery();
-            _m.setId((long) req.deliveryId());
-            entity.setDelivery(_m);
+            entity.setDelivery(entityManager.find(com.example.web_service.feature.admin.delivery.model.Delivery.class, (long) req.deliveryId()));
         }
-        entity.setSaleDetails(req.saleDetails());
         entity.setPaymentMethod(req.paymentMethod());
         entity.setCommissionAmount(req.commissionAmount());
         entity.setExchangeRate(req.exchangeRate());
         if (req.exchangeRateModelId() != null) {
-            com.example.web_service.feature.admin.exchangerate.model.ExchangeRate _m = new com.example.web_service.feature.admin.exchangerate.model.ExchangeRate();
-            _m.setId((long) req.exchangeRateModelId());
-            entity.setExchangeRateModel(_m);
+            entity.setExchangeRateModel(entityManager.find(com.example.web_service.feature.admin.exchangerate.model.ExchangeRate.class, (long) req.exchangeRateModelId()));
         }
         return entity;
     }
@@ -47,7 +44,6 @@ public class SaleHeaderMapper {
         res.setStatus(entity.getStatus());
         res.setUser(entity.getUser());
         res.setDelivery(entity.getDelivery());
-        res.setSaleDetails(entity.getSaleDetails());
         res.setPaymentMethod(entity.getPaymentMethod());
         res.setCommissionAmount(entity.getCommissionAmount());
         res.setExchangeRate(entity.getExchangeRate());
@@ -72,17 +68,10 @@ public class SaleHeaderMapper {
             entity.setStatus(req.status());
         }
         if (req.userId() != null) {
-            com.example.web_service.feature.admin.user.model.User _m = new com.example.web_service.feature.admin.user.model.User();
-            _m.setId(req.userId());
-            entity.setUser(_m);
+            entity.setUser(entityManager.find(com.example.web_service.feature.admin.user.model.User.class, req.userId()));
         }
         if (req.deliveryId() != null) {
-            com.example.web_service.feature.admin.delivery.model.Delivery _m = new com.example.web_service.feature.admin.delivery.model.Delivery();
-            _m.setId((long) req.deliveryId());
-            entity.setDelivery(_m);
-        }
-        if (req.saleDetails() != null) {
-            entity.setSaleDetails(req.saleDetails());
+            entity.setDelivery(entityManager.find(com.example.web_service.feature.admin.delivery.model.Delivery.class, (long) req.deliveryId()));
         }
         if (req.paymentMethod() != null) {
             entity.setPaymentMethod(req.paymentMethod());
@@ -94,9 +83,7 @@ public class SaleHeaderMapper {
             entity.setExchangeRate(req.exchangeRate());
         }
         if (req.exchangeRateModelId() != null) {
-            com.example.web_service.feature.admin.exchangerate.model.ExchangeRate _m = new com.example.web_service.feature.admin.exchangerate.model.ExchangeRate();
-            _m.setId((long) req.exchangeRateModelId());
-            entity.setExchangeRateModel(_m);
+            entity.setExchangeRateModel(entityManager.find(com.example.web_service.feature.admin.exchangerate.model.ExchangeRate.class, (long) req.exchangeRateModelId()));
         }
     }
 }

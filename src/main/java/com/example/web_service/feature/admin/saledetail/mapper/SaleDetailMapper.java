@@ -4,11 +4,15 @@ import com.example.web_service.feature.admin.saledetail.dto.req.*;
 import com.example.web_service.feature.admin.saledetail.dto.res.*;
 import com.example.web_service.feature.admin.saledetail.model.SaleDetail;
 import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class SaleDetailMapper {
+
+    private final jakarta.persistence.EntityManager entityManager;
 
     public SaleDetail fromRequest(SaleDetailRequest req) {
         if (req == null) return null;
@@ -20,19 +24,13 @@ public class SaleDetailMapper {
         entity.setTotal(req.total());
         entity.setStatus(req.status());
         if (req.saleHeaderId() != null) {
-            com.example.web_service.feature.admin.saleheader.model.SaleHeader _m = new com.example.web_service.feature.admin.saleheader.model.SaleHeader();
-            _m.setId(req.saleHeaderId());
-            entity.setSaleHeader(_m);
+            entity.setSaleHeader(entityManager.find(com.example.web_service.feature.admin.saleheader.model.SaleHeader.class, req.saleHeaderId()));
         }
         if (req.couponId() != null) {
-            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
-            _m.setCouponId((long) req.couponId());
-            entity.setCoupon(_m);
+            entity.setCoupon(entityManager.find(com.example.web_service.feature.admin.coupon.model.Coupon.class, (long) req.couponId()));
         }
         if (req.restaurantId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantId());
-            entity.setRestaurant(_m);
+            entity.setRestaurant(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantId()));
         }
         return entity;
     }
@@ -79,19 +77,13 @@ public class SaleDetailMapper {
             entity.setStatus(req.status());
         }
         if (req.saleHeaderId() != null) {
-            com.example.web_service.feature.admin.saleheader.model.SaleHeader _m = new com.example.web_service.feature.admin.saleheader.model.SaleHeader();
-            _m.setId(req.saleHeaderId());
-            entity.setSaleHeader(_m);
+            entity.setSaleHeader(entityManager.find(com.example.web_service.feature.admin.saleheader.model.SaleHeader.class, req.saleHeaderId()));
         }
         if (req.couponId() != null) {
-            com.example.web_service.feature.admin.coupon.model.Coupon _m = new com.example.web_service.feature.admin.coupon.model.Coupon();
-            _m.setCouponId((long) req.couponId());
-            entity.setCoupon(_m);
+            entity.setCoupon(entityManager.find(com.example.web_service.feature.admin.coupon.model.Coupon.class, (long) req.couponId()));
         }
         if (req.restaurantId() != null) {
-            com.example.web_service.feature.admin.restaurant.model.Restaurant _m = new com.example.web_service.feature.admin.restaurant.model.Restaurant();
-            _m.setResId(req.restaurantId());
-            entity.setRestaurant(_m);
+            entity.setRestaurant(entityManager.find(com.example.web_service.feature.admin.restaurant.model.Restaurant.class, req.restaurantId()));
         }
     }
 }

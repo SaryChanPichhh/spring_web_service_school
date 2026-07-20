@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
-import com.example.web_service.feature.category.model.Category;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +26,4 @@ public class Menu extends BasedEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RES_ID", nullable = false)
     private Restaurant restaurants;
-    @ManyToOne
-    @JoinColumn(name = "cate_id")
-    private Category categories;
 }

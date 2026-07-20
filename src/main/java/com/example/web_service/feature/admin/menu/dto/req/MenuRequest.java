@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import com.example.web_service.feature.admin.restaurant.model.Restaurant;
-import com.example.web_service.feature.category.model.Category;
 
 public record MenuRequest(
     String name,
@@ -12,7 +11,6 @@ public record MenuRequest(
     String description,
     String image,
     Double rating,
-    Integer restaurantsId,
-    Integer categoriesId
+    Integer restaurantsId
 ) {
 }

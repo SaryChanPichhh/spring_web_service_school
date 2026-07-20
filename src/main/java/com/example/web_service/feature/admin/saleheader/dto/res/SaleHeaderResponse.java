@@ -20,7 +20,6 @@ public class SaleHeaderResponse {
     private Boolean status;
     private User user;
     private Delivery delivery;
-    private List<SaleDetail> saleDetails;
     private String paymentMethod;
     private Double commissionAmount;
     private Double exchangeRate;
