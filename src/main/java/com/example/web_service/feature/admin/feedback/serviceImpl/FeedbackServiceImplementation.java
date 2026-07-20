@@ -6,6 +6,8 @@ import com.example.web_service.feature.admin.feedback.mapper.FeedbackMapper;
 import com.example.web_service.feature.admin.feedback.model.Feedback;
 import com.example.web_service.feature.admin.feedback.repository.FeedbackRepository;
 import com.example.web_service.feature.admin.feedback.service.FeedbackService;
+import com.example.web_service.feature.admin.user.repository.UserRepository;
+import com.example.web_service.feature.admin.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.*;
@@ -16,6 +18,7 @@ import java.util.List;
 public class FeedbackServiceImplementation implements FeedbackService {
     private final FeedbackRepository repository;
     private final FeedbackMapper mapper;
+    private final UserRepository userRepository;
 
     @Override
     public List<FeedbackResponse> getAll() {
@@ -31,6 +34,11 @@ public class FeedbackServiceImplementation implements FeedbackService {
     @Override
     public FeedbackResponse create(FeedbackRequest req) {
         Feedback entity = mapper.fromRequest(req);
+        if (req.userId() != null) {
+            User user = userRepository.findById(req.userId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            entity.setUser(user);
+        }
         return mapper.toResponse(repository.save(entity));
     }
 
@@ -38,6 +46,11 @@ public class FeedbackServiceImplementation implements FeedbackService {
     public FeedbackResponse update(Long id, FeedbackRequestUpdate reqUpdate) {
         Feedback entity = repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
         mapper.updateFromRequest(entity, reqUpdate);
+        if (reqUpdate.userId() != null) {
+            User user = userRepository.findById(reqUpdate.userId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            entity.setUser(user);
+        }
         return mapper.toResponse(repository.save(entity));
     }
 

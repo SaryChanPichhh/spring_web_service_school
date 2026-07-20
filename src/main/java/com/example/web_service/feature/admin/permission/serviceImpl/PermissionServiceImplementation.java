@@ -24,7 +24,7 @@ public class PermissionServiceImplementation implements PermissionService {
 
     @Override
     public PermissionResponse getById(Long id) {
-        Integer searchId = (Integer) (Object) id;
+        Integer searchId = id.intValue();
         Permission entity = repository.findById(searchId).orElseThrow(() -> new RuntimeException("Not found"));
         return mapper.toResponse(entity);
     }
@@ -37,7 +37,7 @@ public class PermissionServiceImplementation implements PermissionService {
 
     @Override
     public PermissionResponse update(Long id, PermissionRequestUpdate reqUpdate) {
-        Integer searchId = (Integer) (Object) id;
+        Integer searchId = id.intValue();
         Permission entity = repository.findById(searchId).orElseThrow(() -> new RuntimeException("Not found"));
         mapper.updateFromRequest(entity, reqUpdate);
         return mapper.toResponse(repository.save(entity));
@@ -45,7 +45,7 @@ public class PermissionServiceImplementation implements PermissionService {
 
     @Override
     public PermissionResponse delete(Long id) {
-        Integer searchId = (Integer) (Object) id;
+        Integer searchId = id.intValue();
         Permission entity = repository.findById(searchId).orElseThrow(() -> new RuntimeException("Not found"));
         repository.delete(entity);
         return mapper.toResponse(entity);

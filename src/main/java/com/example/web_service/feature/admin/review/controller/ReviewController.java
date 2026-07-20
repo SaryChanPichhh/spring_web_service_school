@@ -25,7 +25,11 @@ public class ReviewController {
     }
 
     @GetMapping("/paginated")
-    public ResponseEntity<ReviewPageResponseDto<ReviewResponse>> getPaginated(org.springframework.data.domain.Pageable pageable) {
+    public ResponseEntity<ReviewPageResponseDto<ReviewResponse>> getPaginated(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page > 0 ? page - 1 : 0, size);
         return ResponseEntity.ok(service.getPaginated(pageable));
     }
 

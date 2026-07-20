@@ -3,7 +3,7 @@ spring:
     name: web_service
 
   datasource:
-    url: jdbc:postgresql://dpg-d9dfr1ernols73cbelu0-a.singapore-postgres.render.com:5432/food_delivery_app_96bo
+    url: jdbc:postgresql://dpg-d9dfr1ernols73cbelu0-a.singapore-postgres.render.com:5432/food_delivery_app_96bo?sslmode=require
     username: food_delivery_app_96bo_user
     password: txRysP8S2eRnJTaTYLgGDR1755u9uLIt
     driver-class-name: org.postgresql.Driver
